@@ -32,71 +32,12 @@ FrameWidgetClass menu_root {
    "flip v" 0
    nocache 0
    {
-    PanelWidgetClass panel_map {
-     clipchildren 1
-     color 0 0 0 0
-     position 0.22509 0.34765
-     size 0.57958 0.29785
-     halign left_ref
-     valign top_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     scaled 0
-     style rover_sim_black
-     {
-      MapWidgetClass Map_Widget {
-       visible 1
-       clipchildren 0
-       position 0 0
-       size 1 1
-       halign center_ref
-       valign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       priority 100
-      }
-     }
-    }
-    PanelWidgetClass panel_editdialog {
-     visible 0
-     clipchildren 1
-     ignorepointer 0
-     position 0.22509 0.34765
-     size 0.57958 0.29785
-     halign left_ref
-     valign top_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style blank
-     {
-      ImageWidgetClass map_fakebg {
-       ignorepointer 0
-       color 0.1569 0.1569 0.1569 1
-       position 0 0
-       size 1 1
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       mode blend
-       "src alpha" 1
-       "no wrap" 1
-       stretch 1
-      }
-     }
-    }
     PanelWidgetClass panel_markers {
      visible 1
      clipchildren 1
      color 0 0 0 0
      position 0.22509 0.34765
-     size 0.20000 0.29785
+     size 0.15000 0.29785
      halign left_ref
      valign top_ref
      hexactpos 0
@@ -184,6 +125,65 @@ FrameWidgetClass menu_root {
        vexactsize 0
        style Editor
        text "View News Feed"
+      }
+     }
+    }
+    PanelWidgetClass panel_map {
+     clipchildren 1
+     color 0 0 0 0
+     position 0.37509 0.34765
+     size 0.42958 0.29785
+     halign left_ref
+     valign top_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     scaled 0
+     style rover_sim_black
+     {
+      MapWidgetClass Map_Widget {
+       visible 1
+       clipchildren 0
+       position 0 0
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       priority 100
+      }
+     }
+    }
+    PanelWidgetClass panel_editdialog {
+     visible 0
+     clipchildren 1
+     ignorepointer 0
+     position 0.37509 0.34765
+     size 0.42958 0.29785
+     halign left_ref
+     valign top_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      ImageWidgetClass map_fakebg {
+       ignorepointer 0
+       color 0.1569 0.1569 0.1569 1
+       position 0 0
+       size 1 1
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       mode blend
+       "src alpha" 1
+       "no wrap" 1
+       stretch 1
       }
      }
     }
