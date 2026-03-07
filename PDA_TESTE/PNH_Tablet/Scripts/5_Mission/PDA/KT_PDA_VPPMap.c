@@ -51,7 +51,7 @@ modded class VPPMapMenu extends UIScriptedMenu {
         if (!m_Initialized) {
             m_AddressPort = g_Game.GetConnectAddressPort();
 
-            layoutRoot = GetGame().GetWorkspace().CreateWidgets( "KT_SMU_Stalker/PDA/data/KT_PDA_VPPMap.layout" );
+            layoutRoot = GetGame().GetWorkspace().CreateWidgets( "PNH_Tablet/PDA/data/KT_PDA_VPPMap.layout" );
             m_MapWidget = MapWidget.Cast( layoutRoot.FindAnyWidget( "Map_Widget" ) );
             WidgetEventHandler.GetInstance().RegisterOnDoubleClick( m_MapWidget, this, "MapDoubleClick" );
 

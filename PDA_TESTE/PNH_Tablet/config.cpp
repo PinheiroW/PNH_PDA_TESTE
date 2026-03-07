@@ -1,15 +1,15 @@
 class CfgMods
 {
-	class KT_SMU_Stalker
+	class PNH_Tablet
 	{
-		name="KT_SMU_Stalker";
-		credits="KampfTeddy";
-		author="KampfTeddy";
+		name="PNH_Tablet";
+		credits="Pinheiro";
+		author="Pinheiro";
 		authorID="";
 		version="1.0";
 		extra=0;
 		type="mod";
-		inputs="KT_SMU_Stalker/PDA/data/Inputs.xml";
+		inputs="PNH_Tablet/PDA/data/Inputs.xml";
 		dependencies[]=
 		{
 			"Game",
@@ -21,33 +21,24 @@ class CfgMods
 			class gameScriptModule
 			{
 				value="";
-				files[]=
-				{
-					"KT_SMU_Stalker/KT_Scripts/3_Game"
-				};
+				files[]={"PNH_Tablet/Scripts/3_Game"};
 			};
 			class worldScriptModule
 			{
 				value="";
-				files[]=
-				{
-					"KT_SMU_Stalker/KT_Scripts/4_world"
-				};
+				files[]={"PNH_Tablet/Scripts/4_World"};
 			};
 			class missionScriptModule
 			{
 				value="";
-				files[]=
-				{
-					"KT_SMU_Stalker/KT_Scripts/5_Mission"
-				};
+				files[]={"PNH_Tablet/Scripts/5_Mission"};
 			};
 		};
 	};
 };
 class CfgPatches
 {
-	class KT_SMU_Stalker
+	class PNH_Tablet
 	{
 		units[]={};
 		weapons[]={};

@@ -16,14 +16,14 @@ FrameWidgetClass menu_root {
   ImageWidgetClass KT_Background {
    ignorepointer 1
    position 0 0
-   size 0.8 0.8
+   size 2048 2048
    halign center_ref
    valign center_ref
-   hexactpos 0
-   vexactpos 0
-   hexactsize 0
-   vexactsize 0
-   image0 "KT_SMU_Stalker\PDA\data\KT_StalkerPDA.edds"
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "PNH_Tablet\PDA\data\PNH_Tablet_Carcaca.edds"
    mode blend
    "src alpha" 1
    "no wrap" 1
@@ -33,12 +33,12 @@ FrameWidgetClass menu_root {
    nocache 0
    {
     PanelWidgetClass panel_map {
-     clipchildren 0
+     clipchildren 1
      color 0 0 0 0
-     position 0.14126 -0.00218
-     size 0.57567 0.76799
-     halign right_ref
-     valign center_ref
+     position 0.22509 0.34765
+     size 0.57958 0.29785
+     halign left_ref
+     valign top_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
@@ -65,10 +65,10 @@ FrameWidgetClass menu_root {
      visible 0
      clipchildren 1
      ignorepointer 0
-     position 0.14082 -0.00228
-     size 0.5745 0.76982
-     halign right_ref
-     valign center_ref
+     position 0.22509 0.34765
+     size 0.57958 0.29785
+     halign left_ref
+     valign top_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
@@ -93,10 +93,12 @@ FrameWidgetClass menu_root {
     }
     PanelWidgetClass panel_markers {
      visible 1
+     clipchildren 1
      color 0 0 0 0
-     position 0.09804 -0.00395
-     size 0.18368 0.76809
-     valign center_ref
+     position 0.22509 0.34765
+     size 0.20000 0.29785
+     halign left_ref
+     valign top_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
@@ -150,7 +152,7 @@ FrameWidgetClass menu_root {
          vexactpos 1
          hexactsize 1
          vexactsize 1
-         image0 "KT_SMU_Stalker\PDA\data\images\info.paa"
+         image0 "PNH_Tablet\PDA\data\images\info.paa"
          imageTexture "{52DDD34979EE096E}gui/imagesets/ccgui_enforce.edds"
          mode blend
          "src alpha" 1
