@@ -1,49 +1,59 @@
-FrameWidgetClass rootFrame {
- position 1.8385 3.47087
- size 1918.88 1076.42004
+FrameWidgetClass menu_root {
+ visible 1
+ inheritalpha 0
+ ignorepointer 0
+ color 0.9373 0.9373 0.9373 1
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
  hexactpos 1
  vexactpos 1
- hexactsize 1
- vexactsize 1
+ hexactsize 0
+ vexactsize 0
+ priority 0
  {
-  ImageWidgetClass KT_PDA {
+  ImageWidgetClass KT_Background {
    ignorepointer 1
    position 0 0
-   size 0.8 0.8
+   size 2048 2048
    halign center_ref
    valign center_ref
-   hexactpos 0
-   vexactpos 0
-   hexactsize 0
-   vexactsize 0
-   imageTexture "{80BDEBD5EC65A959}KT_SMU_Stalker/PDA/data/KT_StalkerPDA.edds"
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "PNH_Tablet\PDA\data\PNH_Tablet_Carcaca.edds"
    mode blend
    "src alpha" 1
-   "no wrap" 0
+   "no wrap" 1
    stretch 1
    "flip u" 0
    "flip v" 0
-   filter 1
    nocache 0
    {
     PanelWidgetClass SchanaPartyManagerWidget {
      ignorepointer 1
-     position 148.77501 95.66509
-     size 1170.66992 663.11597
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
+     position 0.22509 0.34765
+     size 0.57958 0.29785
+     halign left_ref
+     valign top_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
      {
       TextWidgetClass TitlePlayers {
        ignorepointer 1
        color 0.9216 0.6588 0.149 1
-       position -0.27592 0.15116
-       size 581.09601 41.0845
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
+       position 0 0
+       size 0.5 0.06
+       halign left_ref
+       valign top_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
        text "Online Survivors"
        "text color" 0.9216 0.6588 0.149 1
        "text halign" center
@@ -51,12 +61,14 @@ FrameWidgetClass rootFrame {
        {
         ImageWidgetClass ImageWidget3 {
          ignorepointer 1
-         position 123.604 0.12798
-         size 41.8 39.7
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0.02 0
+         size 0.08 0.8
+         halign left_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          image0 "SchanaModParty\GUI\data\person.edds"
          mode blend
          "src alpha" 1
@@ -67,24 +79,28 @@ FrameWidgetClass rootFrame {
       TextWidgetClass TitleParty {
        ignorepointer 1
        color 0.9216 0.6588 0.149 1
-       position 588.70599 0.45169
-       size 581.09601 40.8373
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
+       position 0.5 0
+       size 0.5 0.06
+       halign left_ref
+       valign top_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
        text "Group Members"
        "text halign" center
        "text valign" center
        {
         ImageWidgetClass ImageWidget2 {
          ignorepointer 1
-         position 135.41599 0.68
-         size 41.88 40.384
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0.02 0
+         size 0.08 0.8
+         halign left_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          image0 "SchanaModParty\GUI\data\party.edds"
          mode blend
          "src alpha" 1
@@ -93,35 +109,41 @@ FrameWidgetClass rootFrame {
        }
       }
       ButtonWidgetClass ButtonAdd {
-       position -0.62943 630.16595
-       size 580.34296 31.925
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
+       position 0 0.94
+       size 0.5 0.06
+       halign left_ref
+       valign top_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
        "no focus" 0
        {
         TextWidgetClass ButtonAdd_label {
          ignorepointer 1
          color 0.9216 0.6588 0.149 1
-         position 0.75891 -0.13534
-         size 580.513 31.8623
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          text "Invite"
          "text halign" center
          "text valign" center
          {
           ImageWidgetClass ImageWidget0 {
            ignorepointer 1
-           position 187.12001 -0.496
-           size 29.96 32.056
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           position 0.1 0
+           size 0.05 0.8
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
            image0 "SchanaModParty\GUI\data\add.edds"
            mode blend
            "src alpha" 1
@@ -133,72 +155,86 @@ FrameWidgetClass rootFrame {
        }
       }
       ButtonWidgetClass ButtonRemove {
-       position 590.09406 629.98901
-       size 579.76404 32.4765
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
+       position 0.5 0.94
+       size 0.5 0.06
+       halign left_ref
+       valign top_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
        {
         TextWidgetClass ButtonRemove_label {
          ignorepointer 1
          color 0.9333 0.6588 0.149 1
-         position -1.61797 -0.41751
-         size 581.10199 31.6195
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          text "Remove"
          "text halign" center
          "text valign" center
-        }
-        ImageWidgetClass ImageWidget1 {
-         ignorepointer 1
-         position 174.56799 0.256
-         size 29.968 30.976
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         image0 "SchanaModParty\GUI\data\remove.edds"
-         mode blend
-         "src alpha" 1
-         "no wrap" 0
-         stretch 1
+         {
+          ImageWidgetClass ImageWidget1 {
+           ignorepointer 1
+           position 0.1 0
+           size 0.05 0.8
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           image0 "SchanaModParty\GUI\data\remove.edds"
+           mode blend
+           "src alpha" 1
+           "no wrap" 0
+           stretch 1
+          }
+         }
         }
        }
       }
       PanelWidgetClass PanelWidget0 {
        ignorepointer 1
        color 0.9333 0.6588 0.149 1
-       position 581.01599 -0.67251
-       size 7.41761 663.26202
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
+       position 0.495 0
+       size 0.01 1
+       halign left_ref
+       valign top_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
        style rover_sim_colorable
       }
       PanelWidgetClass Party_background {
        ignorepointer 1
        color 0 0 0 0
-       position 588.85297 41.4762
-       size 581.51801 588.44202
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
+       position 0.505 0.06
+       size 0.495 0.88
+       halign left_ref
+       valign top_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
        style editor_selection
        {
         TextListboxWidgetClass Party {
          color 0 0 0 0.549
-         position 0.74152 1.18254
-         size 580.901 586.20203
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style Default
          "no focus" 1
          "title visible" 0
@@ -212,22 +248,26 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass Players_background {
        ignorepointer 1
        color 0 0 0 0
-       position -0.24202 42.3359
-       size 580.40002 587.58899
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
+       position 0 0.06
+       size 0.495 0.88
+       halign left_ref
+       valign top_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
        style editor_selection
        {
         TextListboxWidgetClass Players {
          color 0 0 0 0.549
-         position 1.47729 0.1473
-         size 579.09503 586.28302
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style Default
          "no focus" 1
          "title visible" 0

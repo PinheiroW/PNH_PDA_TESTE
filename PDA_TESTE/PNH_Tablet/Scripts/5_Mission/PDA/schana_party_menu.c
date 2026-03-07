@@ -1,4 +1,4 @@
-/*modded class SchanaPartyMenu extends UIScriptedMenu {
+modded class SchanaPartyMenu extends UIScriptedMenu {
 	protected bool m_SchanaPartyIsInitialized;
 	protected bool m_SchanaPartyMenuIsOpen;
 
@@ -15,7 +15,8 @@
 
 	override Widget Init () {
 		if (!m_SchanaPartyIsInitialized) {
-			layoutRoot = GetGame ().GetWorkspace ().CreateWidgets ("KT_SMU_Stalker/PDA/data/KT_PDA.layout");
+			// AQUI ESTÁ A LIGAÇÃO PARA A TUA NOVA CARCAÇA:
+			layoutRoot = GetGame ().GetWorkspace ().CreateWidgets ("PNH_Tablet/PDA/data/KT_PDA.layout");
 			m_SchanaPartyPlayerList = TextListboxWidget.Cast (layoutRoot.FindAnyWidget ("Players"));
 			m_SchanaPartyPartyList = TextListboxWidget.Cast (layoutRoot.FindAnyWidget ("Party"));
 			m_SchanaPartyButtonAdd = ButtonWidget.Cast (layoutRoot.FindAnyWidget ("ButtonAdd"));
