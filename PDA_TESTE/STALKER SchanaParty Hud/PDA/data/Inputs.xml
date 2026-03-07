@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UASchanaPartyMenu" loc="kt_settings_party_menu" />
+            <input name="UASchanaPartyPing" loc="kt_settings_party_ping" />
+            <input name="UASchanaPartyPingClear" loc="kt_settings_party_clear_ping" />
+        </actions>
+        <sorting name="ktsettings" loc="kt_settings_menu">
+            <input name="UASchanaPartyMenu"/>
+            <input name="UASchanaPartyPing"/>
+            <input name="UASchanaPartyPingClear"/>
+        </sorting>
+    </inputs>   
+    <preset>
+        <input name="UASchanaPartyMenu">
+            <btn name="kP" />
+        </input>
+        <input name="UASchanaPartyPing">
+            <btn name="kT" />
+        </input>
+        <input name="UASchanaPartyPingClear">
+            <btn name="kY" />
+        </input>
+    </preset>
+</modded_inputs>

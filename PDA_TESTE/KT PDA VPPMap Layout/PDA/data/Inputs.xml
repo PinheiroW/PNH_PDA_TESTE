@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<modded_inputs>
+    <inputs>
+        <actions>
+			<input name="UAOpenVPPMap" loc="kt_settings_openvppmap" />
+            <input name="UAToggleVPPMap3DMarkers" loc="kt_settings_togglevppmap3dmarkers" />
+        </actions>
+        <sorting name="ktsettings" loc="kt_settings_menu">
+            <input name="UAOpenVPPMap"/>
+            <input name="UAToggleVPPMap3DMarkers"/>
+        </sorting>
+    </inputs>   
+    <preset>
+		<input name="UAOpenVPPMap">
+            <btn name="kM">
+            </btn>
+        </input>
+		<input name="UAToggleVPPMap3DMarkers">
+            <btn name="kK">
+            </btn>
+        </input>		
+    </preset>
+</modded_inputs>
