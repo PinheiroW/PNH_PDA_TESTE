@@ -1,7 +1,7 @@
-class EditDialog extends ScriptedWidgetEventHandler {
+class PNH_MapEdit extends ScriptedWidgetEventHandler {
 
-    VPPMapMenu m_Menu;
-    ref MarkerInfo m_Marker;
+    VPPMapMenu m_Menu; // Na Fase 3, isto vai apontar para o PNH_MapUI
+    ref MarkerInfo m_Marker; // Mais tarde, isto apontará para PNH_MarkerData
     int m_MarkerIndex;
     bool m_IsCustomServerMarker = false;
     string m_MarkerSuffix;
@@ -17,11 +17,13 @@ class EditDialog extends ScriptedWidgetEventHandler {
     ButtonWidget m_ButtonClose;
     CheckBoxWidget m_CheckboxCustomServer;
 
-    ref IconListAdapter m_IconListAdapter;
+    // Aponta para os nossos novos Adapters da Fase 1!
+    ref IconListAdapter m_IconListAdapter; 
     ref ColorListAdapter m_ColorListAdapter;
 
-    void EditDialog(VPPMapMenu menu, Widget root) {
+    void PNH_MapEdit(VPPMapMenu menu, Widget root) {
         m_Menu = menu;
+        // Caminho já atualizado para o teu layout
         m_Root = GetGame().GetWorkspace().CreateWidgets( "PNH_Tablet/GUI/VPP/Layouts/EditDialog.layout", root );
         m_EditBoxName = EditBoxWidget.Cast(m_Root.FindAnyWidget( "editbox_name" ));
         m_EditBoxNameOverlay = m_Root.FindAnyWidget( "editbox_name_overlay" );
@@ -35,7 +37,8 @@ class EditDialog extends ScriptedWidgetEventHandler {
         m_CheckboxCustomServer = CheckBoxWidget.Cast(m_Root.FindAnyWidget( "checkbox_customserver" ));
 
         m_IconListAdapter = new IconListAdapter(m_PanelIcon);
-        m_ColorListAdapter = new ColorListAdapter(this, m_PanelColor);
+        // O ColorListAdapter original da tua Fase 1 tem de receber este Menu como argumento!
+        m_ColorListAdapter = new ColorListAdapter(this, m_PanelColor); 
 
         m_Root.SetHandler(this);
     }
@@ -53,7 +56,8 @@ class EditDialog extends ScriptedWidgetEventHandler {
         m_ColorListAdapter.SetSelectedColor(marker.GetColor());
     }
 
-    void OnColorSelected(vector color) {
+    // Esta é a função que é ativada pelo teu ColorListAdapter para pintar o ícone no momento do clique!
+    void SetIconColor(vector color) {
         m_IconListAdapter.SetSelectedColor(color);
     }
 

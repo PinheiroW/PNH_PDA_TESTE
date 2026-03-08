@@ -1,4 +1,4 @@
-class VPPMapMenu extends UIScriptedMenu {
+class PNH_MapUI extends UIScriptedMenu {
 
     private ref array<ref MarkerInfo> m_ClientMarkers = new ref array<ref MarkerInfo>;
     private ref array<ref MarkerInfo> m_ServerMarkers = new ref array<ref MarkerInfo>;
@@ -8,10 +8,10 @@ class VPPMapMenu extends UIScriptedMenu {
     private string m_AddressPort;
 
     MapWidget m_MapWidget;
-    protected ref MarkersListAdapter m_Adapter;
+    protected ref PNH_MarkerList m_Adapter; // Ligado ao novo Componente
     private Widget m_PanelEditDialog;
     ImageWidget m_MapFakeBg;
-    protected ref EditDialog m_EditDialog;
+    protected ref PNH_MapEdit m_EditDialog; // Ligado ao novo Componente
     private TextWidget m_CoordinatesText;
     private bool m_ShowingPlayerCoords = false;
 
@@ -21,11 +21,11 @@ class VPPMapMenu extends UIScriptedMenu {
 
     private MultilineTextWidget m_info_text;
 
-    void VPPMapMenu()
+    void PNH_MapUI()
     {
     }
 
-    void ~VPPMapMenu() {
+    void ~PNH_MapUI() {
         PPEffects.SetBlurMenu( 0 );
         GetGame().GetUIManager().Back();
         g_Game.GetUIManager().ShowCursor(true);
@@ -34,7 +34,7 @@ class VPPMapMenu extends UIScriptedMenu {
         GetGame().GetMission().PlayerControlEnable(false);
         GetGame().GetMission().GetHud().Show( true );
 
-        //Save Markers when map class is destroyed
+        // TODO Fase 3: Mover isto para o PNH_MapStorage
         g_Game.GetClientMarkersCache().UpdateCachedMarkerInfos(m_ClientMarkers);
         g_Game.GetClientMarkersCache().UpdateCachedMarkerInfos(m_CustomServerMarkers, m_AddressPort);
         g_Game.GetClientMarkersCache().SaveCache();
@@ -50,7 +50,7 @@ class VPPMapMenu extends UIScriptedMenu {
             WidgetEventHandler.GetInstance().RegisterOnDoubleClick( m_MapWidget, this, "MapDoubleClick" );
 
             Widget panelListFrame = layoutRoot.FindAnyWidget( "panel_list_frame" );
-            m_Adapter = new MarkersListAdapter(this, panelListFrame);
+            m_Adapter = new PNH_MarkerList(this, panelListFrame); // Chama o nosso PNH_MarkerList
 
             m_PanelEditDialog = layoutRoot.FindAnyWidget( "panel_editdialog" );
             m_MapFakeBg = ImageWidget.Cast(m_PanelEditDialog.FindAnyWidget("map_fakebg"));
@@ -62,9 +62,9 @@ class VPPMapMenu extends UIScriptedMenu {
             infoImage.LoadImageFile(0, "set:vpp_map_ui image:icon_info");
 
             m_info_text = MultilineTextWidget.Cast(layoutRoot.FindAnyWidget( "info_text" ));
-            string tooltip = "Double-click map to add a marker";
+            string tooltip = "Duplo Clique no mapa para adicionar marcação";
             if (!g_Game.CanUse3DMarkers())
-                tooltip += "\nThis server has disabled 3D markers feature!";
+                tooltip += "\nEste servidor tem os hologramas 3D desativados!";
 
             m_info_text.SetText(tooltip);
 
@@ -81,7 +81,6 @@ class VPPMapMenu extends UIScriptedMenu {
         if (underCursor == null) return;
 
         if (EditBoxWidget.Cast(underCursor)) {
-            //Disable hotkeys player typing.
             g_Game.SetKeyboardBusy(true);
         } else {
             g_Game.SetKeyboardBusy(false);
@@ -100,7 +99,7 @@ class VPPMapMenu extends UIScriptedMenu {
             m_ShowingPlayerCoords = false;
         } else if (!m_ShowingPlayerCoords && !g_Game.OwnPositionMarkerDisabled()) {
             coords = GetGame().GetPlayer().GetPosition();
-            text = string.Format("My X/Y: %1 / %2", Math.Round(coords[0]), Math.Round(coords[2]));
+            text = string.Format("Meu X/Y: %1 / %2", Math.Round(coords[0]), Math.Round(coords[2]));
             m_CoordinatesText.Show(true);
             m_CoordinatesText.SetText(text);
             m_CoordinatesText.SetColor(ARGB(255,255,255,0));
@@ -108,11 +107,6 @@ class VPPMapMenu extends UIScriptedMenu {
         } else if (g_Game.OwnPositionMarkerDisabled()) {
             m_CoordinatesText.Show(false);
         }
-    }
-
-    override bool OnClick(Widget w, int x, int y, int button)
-    {
-        return super.OnClick(w, x, y, button);
     }
 
     bool IsMenuOpen() {
@@ -130,7 +124,7 @@ class VPPMapMenu extends UIScriptedMenu {
     void ReloadMarkers() {
         ref ClientMarkersCache cache = g_Game.GetClientMarkersCache();
         if (cache) {
-            cache.LoadCache(); //re-load the saved json incase raw edits were made.
+            cache.LoadCache(); 
             m_ClientMarkers = cache.GetCachedArray();
             m_CustomServerMarkers = cache.GetCachedArray(m_AddressPort);
             DisplayClientMarkers();
@@ -138,14 +132,14 @@ class VPPMapMenu extends UIScriptedMenu {
         }
     }
 
-    private void BuildClientHeaderItem(HeaderItem headerItem, ref array<ref MarkerInfo> markers) {
+    private void BuildClientHeaderItem(PNH_HeaderItem headerItem, ref array<ref MarkerInfo> markers) {
         headerItem.Clear();
         for(int i = 0; i < markers.Count(); i++) {
             MarkerInfo marker = markers.Get(i);
             if (marker.IsActive()) {
-                m_MapWidget.AddUserMark(marker.GetPosition(), marker.GetName(), VectorToARGB(marker.GetColor()), marker.GetIconPath());
+                m_MapWidget.AddUserMark(marker.GetPosition(), marker.GetName(), VPPMapMenu.VectorToARGB(marker.GetColor()), marker.GetIconPath());
             }
-            headerItem.AddListItem(new ListItem(headerItem, marker, i));
+            headerItem.AddListItem(new PNH_ListItem(headerItem, marker, i));
 
             if (g_Game.CanUse3DMarkers()) {
                 g_Game.AddClient3dMarker( new VPP3DMarker(marker.GetName(), marker.GetIconPath(), marker.GetPosition(), marker.Is3DActive()) );
@@ -153,15 +147,12 @@ class VPPMapMenu extends UIScriptedMenu {
         }
     }
 
-    /*
-        Goes thru m_ClientMarkers and handles to display markers according to save config
-    */
     void DisplayClientMarkers() {
         m_MapWidget.ClearUserMarks();
         DisplayPlayerPosition();
-        g_Game.SetClient3dMarkers(NULL); //Clear client 3d markers array
-        g_Game.SetServer3dMarkers(NULL); //Clear server 3d markers array
-        HeaderItem headerItem = m_Adapter.GetClientMarkersHeaderItem();
+        g_Game.SetClient3dMarkers(NULL); 
+        g_Game.SetServer3dMarkers(NULL); 
+        PNH_HeaderItem headerItem = m_Adapter.GetClientMarkersHeaderItem();
         BuildClientHeaderItem(headerItem, m_ClientMarkers);
         headerItem = m_Adapter.GetCustomServerMarkersHeaderItem();
         BuildClientHeaderItem(headerItem, m_CustomServerMarkers);
@@ -172,17 +163,17 @@ class VPPMapMenu extends UIScriptedMenu {
         m_ServerMarkers = g_Game.GetServerMarkers();
         ref array<ref VPP3DMarker> marker3d = new array<ref VPP3DMarker>;
         if (m_ServerMarkers != NULL) {
-            HeaderItem headerItem = m_Adapter.GetServerMarkersHeaderItem();
+            PNH_HeaderItem headerItem = m_Adapter.GetServerMarkersHeaderItem();
             headerItem.Clear();
             for(int i = 0; i < m_ServerMarkers.Count(); i++) {
                 MarkerInfo marker = m_ServerMarkers.Get(i);
                 if(marker.IsActive()) {
-                    m_MapWidget.AddUserMark(marker.GetPosition(), marker.GetName(), VectorToARGB(marker.GetColor()), marker.GetIconPath());
+                    m_MapWidget.AddUserMark(marker.GetPosition(), marker.GetName(), VPPMapMenu.VectorToARGB(marker.GetColor()), marker.GetIconPath());
                 }
                 if(marker.Is3DActive() && !marker.Is3DForcedDisabled()) {
                     marker3d.Insert(new VPP3DMarker(marker.GetName(),marker.GetIconPath(),marker.GetPosition(), true));
                 }
-                headerItem.AddListItem(new ListItem(headerItem, marker, i));
+                headerItem.AddListItem(new PNH_ListItem(headerItem, marker, i));
             }
             g_Game.SetServer3dMarkers(marker3d);
         }
@@ -191,11 +182,10 @@ class VPPMapMenu extends UIScriptedMenu {
 
     void DisplayPlayerPosition() {
         if (!g_Game.OwnPositionMarkerDisabled()) {
-            m_MapWidget.AddUserMark(GetGame().GetPlayer().GetPosition(), "Me", ARGB(255,255,255,0), "PNH_Tablet\\GUI\\VPP\\Textures\\CustomMapIcons\\waypointeditor_CA.paa");
+            m_MapWidget.AddUserMark(GetGame().GetPlayer().GetPosition(), "Eu", ARGB(255,255,255,0), "PNH_Tablet\\GUI\\VPP\\Textures\\CustomMapIcons\\waypointeditor_CA.paa");
         }
     }
 
-    //Returns world coords of where player clicks on map
     vector GetMapClickPos() {
         vector world_pos,ScreenToMap,dir,from,to;
 
@@ -210,7 +200,6 @@ class VPPMapMenu extends UIScriptedMenu {
 
     void MapDoubleClick(Widget w, int x, int y, int button) {
         if (button == MouseState.LEFT) {
-            //string name, string path, vector color, vector pos, bool isActive = true, bool is3DActive = false
             int index;
             string suffix;
             if (m_LastEditedMarker) {
@@ -222,36 +211,27 @@ class VPPMapMenu extends UIScriptedMenu {
                 m_MarkerSuffix++;
                 index = m_ClientMarkers.Insert( new MarkerInfo(name, m_LastEditedMarker.GetIconPath(), m_LastEditedMarker.GetColor(), GetMapClickPos(), true, true) );
             } else {
-                index = m_ClientMarkers.Insert( new MarkerInfo("Marker", "dz\\gear\\navigation\\data\\map_border_cross_ca.paa", Vector(255,255,255), GetMapClickPos(), true, true) );
+                index = m_ClientMarkers.Insert( new MarkerInfo("Novo Ponto", "dz\\gear\\navigation\\data\\map_border_cross_ca.paa", Vector(255,255,255), GetMapClickPos(), true, true) );
             }
             g_Game.GetClientMarkersCache().UpdateCachedMarkerInfos(m_ClientMarkers);
-            g_Game.GetClientMarkersCache().SaveCache(); //Save directly to json
-            //Redraw markers
+            g_Game.GetClientMarkersCache().SaveCache(); 
             ReloadMarkers();
             ShowDialog(index, false, true, suffix);
         } else if (button == MouseState.RIGHT) {
-            //Remove Marker by positon
             RemoveMarker(GetMapClickPos());
         }
     }
 
-    /*
-        Remove marker by using exact position
-    */
     void RemoveMarkerExact(vector pos, bool isCustomServer) {
         string addressPort = "";
         if (isCustomServer) {
             addressPort = m_AddressPort;
         }
         g_Game.GetClientMarkersCache().RemoveCachedMarker(pos, addressPort);
-        g_Game.GetClientMarkersCache().SaveCache(); //Save directly to json
-        //Redraw markers
+        g_Game.GetClientMarkersCache().SaveCache(); 
         ReloadMarkers();
     }
 
-    /*
-        Remove marker by using relative position
-    */
     void RemoveMarker(vector relativePos) {
         float minDistance = 86, distance;
         ref MarkerInfo nearestMarker;
@@ -276,14 +256,6 @@ class VPPMapMenu extends UIScriptedMenu {
         }
     }
 
-    static int VectorToARGB(vector color) {
-        float R,G,B;
-        R = color[0];
-        G = color[1];
-        B = color[2];
-        return ARGB(255,R,G,B);
-    }
-
     void EditMarkerVisibility(array<int> indexes, bool show2D, bool show3D, bool isClientMarker, bool isCustomServerMarker) {
         array<ref MarkerInfo> markers;
         foreach(int index : indexes) {
@@ -305,9 +277,9 @@ class VPPMapMenu extends UIScriptedMenu {
                 addressPort = m_AddressPort;
             }
             g_Game.GetClientMarkersCache().UpdateCachedMarkerInfos(markers, addressPort);
-            g_Game.GetClientMarkersCache().SaveCache(); //Save directly to json
+            g_Game.GetClientMarkersCache().SaveCache(); 
         }
-        ReloadMarkers(); //Reload all markers
+        ReloadMarkers(); 
     }
 
     void EditMarkerAttributes(int index, string name, string markerSuffix, string iconPath, vector color, bool wasCustomServer, bool isCustomServer) {
@@ -343,14 +315,14 @@ class VPPMapMenu extends UIScriptedMenu {
         } else if (!isCustomServer && !wasCustomServer) {
             g_Game.GetClientMarkersCache().UpdateCachedMarkerInfos(m_ClientMarkers);
         }
-        g_Game.GetClientMarkersCache().SaveCache(); //Save directly to json
-        ReloadMarkers(); //Reload all markers
+        g_Game.GetClientMarkersCache().SaveCache(); 
+        ReloadMarkers(); 
     }
 
     void ShowDialog(int markerIndex, bool isCustomServer, bool isNewMarker, string markerSuffix = "") {
         g_Game.HideAll3dMarkers();
         if (!m_EditDialog) {
-            m_EditDialog = new EditDialog(this, m_PanelEditDialog);
+            m_EditDialog = new PNH_MapEdit(this, m_PanelEditDialog); // Abre o teu novo Menu PNH!
         }
         m_MapWidget.Show(false);
         m_MapFakeBg.Show(true);
