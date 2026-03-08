@@ -4,7 +4,7 @@ ImageSetClass {
  Textures {
   ImageSetTextureClass {
    mpix 1
-   path "{260286D9ED28FC72}VanillaPPMap/GUI/Textures/UI_Icons.edds"
+   path "{260286D9ED28FC72}PNH_Tablet/GUI/VPP/Textures/UI_Icons.edds"
   }
  }
  Images {

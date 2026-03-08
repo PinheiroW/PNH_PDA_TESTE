@@ -22,7 +22,7 @@ class EditDialog extends ScriptedWidgetEventHandler {
 
     void EditDialog(VPPMapMenu menu, Widget root) {
         m_Menu = menu;
-        m_Root = GetGame().GetWorkspace().CreateWidgets( "VanillaPPMap/GUI/Layouts/EditDialog.layout", root );
+        m_Root = GetGame().GetWorkspace().CreateWidgets( "PNH_Tablet/GUI/VPP/Layouts/EditDialog.layout", root );
         m_EditBoxName = EditBoxWidget.Cast(m_Root.FindAnyWidget( "editbox_name" ));
         m_EditBoxNameOverlay = m_Root.FindAnyWidget( "editbox_name_overlay" );
         m_EditBoxNameOverlay.Show(false);

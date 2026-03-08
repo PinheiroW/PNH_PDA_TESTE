@@ -4,7 +4,7 @@ class ColorListAdapter extends ListAdapter {
     private vector m_SelectedColor;
 
     void ColorListAdapter(EditDialog dialog, Widget root) {
-        super.init("VanillaPPMap/GUI/Layouts/List/HorizontalList.layout", root);
+        super.init("PNH_Tablet/GUI/VPP/Layouts/List/HorizontalList.layout", root);
 
         m_EditDialog = dialog;
     }
@@ -80,7 +80,7 @@ class ColorItemViewHolder extends ItemViewHolder {
     ImageWidget mSelectedImage;
 
     void ColorItemViewHolder(Widget root) {
-        super.init(GetGame().GetWorkspace().CreateWidgets("VanillaPPMap/GUI/Layouts/List/ColorListItem.layout", root));
+        super.init(GetGame().GetWorkspace().CreateWidgets("PNH_Tablet/GUI/VPP/Layouts/List/ColorListItem.layout", root));
 
         mColorImage = ImageWidget.Cast( m_RootWidget.FindAnyWidget( "color_image" ) );
         mSelectedImage = ImageWidget.Cast( m_RootWidget.FindAnyWidget( "selected_image" ) );

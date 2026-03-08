@@ -9,7 +9,7 @@ class MarkersListAdapter extends ListAdapter {
     VPPMapMenu m_Menu;
 
     void MarkersListAdapter(VPPMapMenu menu, Widget root) {
-        super.init("VanillaPPMap/GUI/Layouts/List/VerticalList.layout", root);
+        super.init("PNH_Tablet/GUI/VPP/Layouts/List/VerticalList.layout", root);
 
         m_Menu = menu;
 
@@ -53,7 +53,7 @@ class MarkersListAdapter extends ListAdapter {
             itemCounter++;
             if (!listContentContainer || itemCounter >= 99) {
                 itemCounter = 0;
-                listContentContainer = GetGame().GetWorkspace().CreateWidgets("VanillaPPMap/GUI/Layouts/List/ListContentContainer.layout", m_ListContent);
+                listContentContainer = GetGame().GetWorkspace().CreateWidgets("PNH_Tablet/GUI/VPP/Layouts/List/ListContentContainer.layout", m_ListContent);
             }
             ItemViewHolder viewHolder = CreateViewHolder(listContentContainer, item);
             FillViewHolder(viewHolder, item);
@@ -208,7 +208,7 @@ class HeaderItemViewHolder extends VerticalItemViewHolder {
     ImageWidget m_ExpandIcon;
 
     void HeaderItemViewHolder(Widget root) {
-        init(GetGame().GetWorkspace().CreateWidgets( "VanillaPPMap/GUI/Layouts/List/MarkerHeaderItem.layout", root));
+        init(GetGame().GetWorkspace().CreateWidgets( "PNH_Tablet/GUI/VPP/Layouts/List/MarkerHeaderItem.layout", root));
 
         m_CollapseIcon = ImageWidget.Cast( m_RootWidget.FindAnyWidget( "collapse_icon" ) );
         m_ExpandIcon = ImageWidget.Cast( m_RootWidget.FindAnyWidget( "expand_icon" ) );
@@ -259,7 +259,7 @@ class ListItemViewHolder extends VerticalItemViewHolder {
     ImageWidget m_Image;
 
     void ListItemViewHolder(Widget root) {
-        init(GetGame().GetWorkspace().CreateWidgets( "VanillaPPMap/GUI/Layouts/List/MarkerListItem.layout", root));
+        init(GetGame().GetWorkspace().CreateWidgets( "PNH_Tablet/GUI/VPP/Layouts/List/MarkerListItem.layout", root));
 
         m_Image = ImageWidget.Cast( m_RootWidget.FindAnyWidget( "image" ) );
     }

@@ -1,4 +1,4 @@
-modded class VPPMapConfig extends MarkersCacheInterface {
+class VPPMapConfig extends MarkersCacheInterface {
     private ref array<ref MarkerInfo> M_STATIC_MARKER_ARRAY = new array<ref MarkerInfo>;
     private bool m_CanUse3DMarkers = true;
     private bool m_OwnPositionMarkerDisabled = false;

@@ -11,7 +11,6 @@ class VPPMapMenu extends UIScriptedMenu {
     protected ref MarkersListAdapter m_Adapter;
     private Widget m_PanelEditDialog;
     ImageWidget m_MapFakeBg;
-    private ButtonWidget m_openNewsFeed;
     protected ref EditDialog m_EditDialog;
     private TextWidget m_CoordinatesText;
     private bool m_ShowingPlayerCoords = false;
@@ -20,12 +19,10 @@ class VPPMapMenu extends UIScriptedMenu {
     private string m_LastEditedMarkerName;
     private int m_MarkerSuffix = 1;
 
-    private ref VPPNewsFeed m_VPPNewsFeed;
     private MultilineTextWidget m_info_text;
 
     void VPPMapMenu()
     {
-        m_VPPNewsFeed = new VPPNewsFeed();
     }
 
     void ~VPPMapMenu() {
@@ -41,9 +38,6 @@ class VPPMapMenu extends UIScriptedMenu {
         g_Game.GetClientMarkersCache().UpdateCachedMarkerInfos(m_ClientMarkers);
         g_Game.GetClientMarkersCache().UpdateCachedMarkerInfos(m_CustomServerMarkers, m_AddressPort);
         g_Game.GetClientMarkersCache().SaveCache();
-
-        if (m_VPPNewsFeed != null)
-            delete m_VPPNewsFeed;
     }
 
     override Widget Init() {
@@ -51,7 +45,7 @@ class VPPMapMenu extends UIScriptedMenu {
         if (!m_Initialized) {
             m_AddressPort = g_Game.GetConnectAddressPort();
 
-            layoutRoot = GetGame().GetWorkspace().CreateWidgets( "VanillaPPMap/GUI/Layouts/VPPMapMenu.layout" );
+            layoutRoot = GetGame().GetWorkspace().CreateWidgets("PNH_Tablet/GUI/VPP/Layouts/VPPMapMenu.layout");
             m_MapWidget = MapWidget.Cast( layoutRoot.FindAnyWidget( "Map_Widget" ) );
             WidgetEventHandler.GetInstance().RegisterOnDoubleClick( m_MapWidget, this, "MapDoubleClick" );
 
@@ -60,9 +54,7 @@ class VPPMapMenu extends UIScriptedMenu {
 
             m_PanelEditDialog = layoutRoot.FindAnyWidget( "panel_editdialog" );
             m_MapFakeBg = ImageWidget.Cast(m_PanelEditDialog.FindAnyWidget("map_fakebg"));
-            m_MapFakeBg.LoadImageFile(0, "VanillaPPMap\\GUI\\Textures\\map_blurred.paa");
-
-            m_openNewsFeed    = ButtonWidget.Cast(layoutRoot.FindAnyWidget("openNewsFeed"));
+            m_MapFakeBg.LoadImageFile(0, "PNH_Tablet\\GUI\\VPP\\Textures\\map_blurred.paa");
 
             m_CoordinatesText = TextWidget.Cast(layoutRoot.FindAnyWidget("coordinates_text"));
 
@@ -72,7 +64,7 @@ class VPPMapMenu extends UIScriptedMenu {
             m_info_text = MultilineTextWidget.Cast(layoutRoot.FindAnyWidget( "info_text" ));
             string tooltip = "Double-click map to add a marker";
             if (!g_Game.CanUse3DMarkers())
-            	tooltip += "\nThis server has disabled 3D markers feature!";
+                tooltip += "\nThis server has disabled 3D markers feature!";
 
             m_info_text.SetText(tooltip);
 
@@ -120,20 +112,8 @@ class VPPMapMenu extends UIScriptedMenu {
 
     override bool OnClick(Widget w, int x, int y, int button)
     {
-        super.OnClick(w, x, y, button);
-
-        if (w == m_openNewsFeed)
-        {
-            if (m_VPPNewsFeed.ContentLoaded())
-            {
-                m_VPPNewsFeed.ConstructNewsFeed(layoutRoot, true);
-                m_VPPNewsFeed.ShiftPosition();
-            }
-            return true;
-        }
         return super.OnClick(w, x, y, button);
     }
-
 
     bool IsMenuOpen() {
         return m_IsMenuOpen;
@@ -174,7 +154,7 @@ class VPPMapMenu extends UIScriptedMenu {
     }
 
     /*
-    	Goes thru m_ClientMarkers and handles to display markers according to save config
+        Goes thru m_ClientMarkers and handles to display markers according to save config
     */
     void DisplayClientMarkers() {
         m_MapWidget.ClearUserMarks();
@@ -211,7 +191,7 @@ class VPPMapMenu extends UIScriptedMenu {
 
     void DisplayPlayerPosition() {
         if (!g_Game.OwnPositionMarkerDisabled()) {
-            m_MapWidget.AddUserMark(GetGame().GetPlayer().GetPosition(), "Me", ARGB(255,255,255,0), "VanillaPPMap\\GUI\\Textures\\CustomMapIcons\\waypointeditor_CA.paa");
+            m_MapWidget.AddUserMark(GetGame().GetPlayer().GetPosition(), "Me", ARGB(255,255,255,0), "PNH_Tablet\\GUI\\VPP\\Textures\\CustomMapIcons\\waypointeditor_CA.paa");
         }
     }
 
@@ -256,7 +236,7 @@ class VPPMapMenu extends UIScriptedMenu {
     }
 
     /*
-    	Remove marker by using exact position
+        Remove marker by using exact position
     */
     void RemoveMarkerExact(vector pos, bool isCustomServer) {
         string addressPort = "";
@@ -270,7 +250,7 @@ class VPPMapMenu extends UIScriptedMenu {
     }
 
     /*
-    	Remove marker by using relative position
+        Remove marker by using relative position
     */
     void RemoveMarker(vector relativePos) {
         float minDistance = 86, distance;

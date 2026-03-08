@@ -12,7 +12,7 @@ class VPP3DMarker extends UIScriptedMenu {
     private bool             m_IsMarkerVisible;
 
     void VPP3DMarker( string MarkerName, string iconPath, vector MarkerPos, bool visible ) {
-        m_MarkerRootWidget = GetGame().GetWorkspace().CreateWidgets( "VanillaPPMap/GUI/Layouts/3DMarker.layout" );
+        m_MarkerRootWidget = GetGame().GetWorkspace().CreateWidgets( "PNH_Tablet/GUI/VPP/Layouts/3DMarker.layout" );
         m_SpacerGrid       = GridSpacerWidget.Cast( m_MarkerRootWidget.FindAnyWidget( "SpacerGrid" ) );
 
         m_MarkerIcon       = ImageWidget.Cast( m_MarkerRootWidget.FindAnyWidget( "MarkerIcon" ) );

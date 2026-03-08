@@ -4,7 +4,7 @@ class IconListAdapter extends ListAdapter {
     private vector m_SelectedColor = Vector(255,255,255);
 
     void IconListAdapter(Widget root) {
-        super.init("VanillaPPMap/GUI/Layouts/List/HorizontalList.layout", root);
+        super.init("PNH_Tablet/GUI/VPP/Layouts/List/HorizontalList.layout", root);
     }
 
     void SetSelectedIcon(string icon) {
@@ -84,7 +84,7 @@ class IconItemViewHolder extends ItemViewHolder {
     ImageWidget mSelectedImage;
 
     void IconItemViewHolder(Widget root) {
-        super.init(GetGame().GetWorkspace().CreateWidgets("VanillaPPMap/GUI/Layouts/List/IconListItem.layout", root));
+        super.init(GetGame().GetWorkspace().CreateWidgets("PNH_Tablet/GUI/VPP/Layouts/List/IconListItem.layout", root));
 
         mIconImage = ImageWidget.Cast( m_RootWidget.FindAnyWidget( "icon_image" ) );
         mSelectedImage = ImageWidget.Cast( m_RootWidget.FindAnyWidget( "selected_image" ) );

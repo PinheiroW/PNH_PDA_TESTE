@@ -21,29 +21,17 @@ class CfgMods
 			class gameScriptModule
 			{
 				value="";
-				files[]=
-				{
-					"PNH_Tablet/Scripts/3_Game",
-					"PNH_Tablet/Scripts/3_Game/VPP"
-				};
+				files[]={"PNH_Tablet/Scripts/3_Game"};
 			};
 			class worldScriptModule
 			{
 				value="";
-				files[]=
-				{
-					"PNH_Tablet/Scripts/4_World"
-				};
+				files[]={"PNH_Tablet/Scripts/4_World"};
 			};
 			class missionScriptModule
 			{
 				value="";
-				files[]=
-				{
-					"PNH_Tablet/Scripts/5_Mission",
-					"PNH_Tablet/Scripts/5_Mission/VPP",
-					"PNH_Tablet/Scripts/5_Mission/PDA"
-				};
+				files[]={"PNH_Tablet/Scripts/5_Mission"};
 			};
 		};
 	};
